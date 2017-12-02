@@ -28,7 +28,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 	private final UserDetailsServiceImpl userDetailsService;
 
 	private static final String tokenValidationURL = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=";
-	private static final String microServicesURL = "http://localhost:9090/";
+	private static final String microServicesURL = "http://localhost:9090/user/";
 	private static final String defaultPassword = "password";
 
 	public JwtAuthenticationTokenFilter(UserDetailsServiceImpl userDetailsService) {
@@ -78,10 +78,11 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 				System.out.println("Signup " + signUpHeader);
 
 				if (signUpHeader != null && signUpHeader.equalsIgnoreCase("true")) {
-					RestTemplate restTemplate = new RestTemplate();
+					
+					CustomRestTemplate customRestTemplate = new CustomRestTemplate();
 
 					User newUser = new User(username, email, new BCryptPasswordEncoder().encode(defaultPassword));
-					restTemplate.postForEntity(microServicesURL + "create", newUser, User.class).getBody();
+					customRestTemplate.restTemplate().postForEntity(microServicesURL + "create", newUser, User.class).getBody();
 
 					logger.info("In User Create" + username);
 					response.setStatus(201);

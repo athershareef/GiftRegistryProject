@@ -77,29 +77,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class)
 				.addFilterAt(filter(), BasicAuthenticationFilter.class);
 
-		// logout()
-		// .logoutRequestMatcher(new
-		// AntPathRequestMatcher("/logout")).logoutSuccessUrl("/logout/success").and()
-		//
-		// http
-		// // starts authorizing configurations
-		// .authorizeRequests()
-		// // ignore the "/" and "/index.html"
-		// // .antMatchers("/", "/**.html", "/**.js").permitAll()
-		// // authenticate all remaining URLS
-		// .anyRequest().fullyAuthenticated()//
-		// .and()//
-		// // setting the logout URL "/logout" - default logout URL
-		// .logout()//
-		// // after successful logout the application will redirect to "/"
-		// // path
-		// .logoutSuccessUrl("/")//
-		// .permitAll()//
-		// .and()//
-		// // Setting the filter for the URL "/google/login"
-		// .addFilterAt(filter(), BasicAuthenticationFilter.class)//
-		// .csrf()//
-		// .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 	}
 
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
