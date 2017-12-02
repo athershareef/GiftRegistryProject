@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,13 +51,13 @@ public class MicroItemController {
 		return createdItem;
 	}
 
-	@GetMapping
+	@GetMapping("/itemList")
 	public Collection<Item> getAllItems() {
 		logger.info("Retrieving the Items");
 		return itemService.getAllItems();
 	}
 
-	@GetMapping("/id/{id}")
+	@GetMapping("/{id}")
 	public Item getItemById(@PathVariable long id) {
 		logger.info("Retrieving the Item " + id);
 		Item item = itemService.getItemById(id);
@@ -69,23 +68,23 @@ public class MicroItemController {
 		return item;
 	}
 
-	@DeleteMapping(value = "/id/{id}")
-	public Response deleteItem(@Valid @PathVariable("id") long id) {
+	@PostMapping(value = "/remove")
+	public Response deleteItem(@RequestBody String id, HttpServletResponse response) {
 		logger.info("Deleting the Item: " + id);
 
-		Item itemtoDelete = itemService.getItemById(id);
-		itemService.deleteItem(id);
+		Item itemtoDelete = itemService.getItemById(Long.parseLong(id));
+		itemService.deleteItem(Long.parseLong(id));
 		/**
 		 * idForDelete used to detect the delete success
 		 */
-		if (itemtoDelete != null)
-			return new Response("Deleted Item with id " + id);
-
-		/**
-		 * Else create a new Response message and send via HTTP
-		 */
-
-		return new Response("Unable to delete");
+		if (itemtoDelete != null) {
+			response.setStatus(200);
+			return new Response("Succesfully deleted Item with Id " + id);
+		} else {
+			return new Response("Unable to Delete!");
+		}
 	}
 
+	
+	
 }
