@@ -3,6 +3,7 @@ package com.gift.service;
 import java.util.List;
 
 import com.gift.model.Registry;
+import com.gift.model.RegistryItem;
 
 public interface IRegistryService {
 
@@ -15,5 +16,7 @@ public interface IRegistryService {
 	void deleteRegistryById(long id);
 
 	Registry updateRegistry(Registry registry);
+	
+	List<RegistryItem> getRegistryItemList(Registry registry);
 
 }

@@ -1,12 +1,11 @@
 package com.gift.repository;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.gift.model.Registry;
-import com.gift.model.User;
 
 /**
  * The Interface ItemRepository.
@@ -19,6 +18,12 @@ public interface RegistryRepository extends JpaRepository<Registry, Long> {
 	 * which enables our project to be connected to Any Database possible
 	 */
 
-	List<Registry> getAllByAssignedUser(User user);
+	Set<Registry> getAllByUserUserId(Long userId);
+
+	// List<Registry> getAllByusers_sharedto(Long userId);
+	Set<Registry> getAllBySharedUserList_UserId(Long userId);
+
+	Set<Registry> getAllByShared(String sharedType);
+	
 
 }

@@ -12,26 +12,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
   user: User;
   loggedIn = false;
   userChangeSubs: Subscription;
+  admin = false;
 
 
   constructor(private authService: AuthService) {
   }
 
   ngOnInit() {
-    console.log('in Header Init' + this.loggedIn);
     this.userChangeSubs = this.authService.userChange.subscribe((user: User) => {
       this.user = user;
       if (user.email === '') {
         this.loggedIn = false;
       } else {
         this.loggedIn = true;
+        if (user.email === 'admin@gmail.com') {
+          this.admin = true;
+        }
       }
     });
-    console.log('in Header Cons Init' + this.loggedIn);
   }
 
   onSignOut() {
     this.authService.signOutUser();
+    this.admin = false;
   }
 
   ngOnDestroy(): void {

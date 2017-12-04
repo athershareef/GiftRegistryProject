@@ -1,6 +1,8 @@
 package com.gift.controller;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
@@ -38,6 +40,23 @@ public class MicroUserController {
 	@Autowired
 	private UserServiceImpl userService;
 
+	@GetMapping("/users")
+	public List<User> getAllUsers(HttpServletResponse response) {
+		logger.info("Retrieving All users: ");
+
+		/**
+		 * Optional structure to store null without having any exceptions
+		 */
+		List<User> users = new ArrayList<User>();
+		try {
+			users = userService.getAllUsers();
+			response.setStatus(200);
+		} catch (Exception e) {
+			throw new ItemNotFoundException("No users present");
+		}
+		return users;
+	}
+
 	@PostMapping("/create")
 	public User createUser(@Valid @RequestBody User user, HttpServletResponse response) {
 		logger.info("Creating the User");
@@ -74,7 +93,7 @@ public class MicroUserController {
 	}
 
 	@PostMapping(value = "/email")
-	public User getUserByEmail(@Valid @RequestBody String email) {
+	public User getUserByEmail(@RequestBody String email) {
 		logger.info("Retrieving the user by email: " + email);
 
 		/**
@@ -82,6 +101,7 @@ public class MicroUserController {
 		 */
 		User user = new User();
 		try {
+			email = email.replaceAll("\"", "");
 			user = userService.getUserByEmail(email);
 
 			logger.debug("Retrieving the user: " + user.getUsername());

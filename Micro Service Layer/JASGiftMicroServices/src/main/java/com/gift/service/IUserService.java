@@ -1,5 +1,6 @@
 package com.gift.service;
 
+import java.util.List;
 import java.util.Set;
 
 import com.gift.model.User;
@@ -14,5 +15,7 @@ public interface IUserService {
 	User getUserByEmail(String email);
 
 	User updateUser(User user);
+	
+	List<User> getAllUsers();
 
 }

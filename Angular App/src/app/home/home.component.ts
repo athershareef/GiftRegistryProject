@@ -12,7 +12,6 @@ export class HomeComponent implements OnInit {
   loggedIn = false;
   user: User;
 
-
   constructor(private authService: AuthService) {
   }
 

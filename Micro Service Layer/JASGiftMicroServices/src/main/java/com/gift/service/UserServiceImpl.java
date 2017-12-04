@@ -2,6 +2,7 @@ package com.gift.service;
 
 import static com.gift.util.Messages.USER_EXISTS;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.transaction.Transactional;
@@ -69,6 +70,11 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public User getUserByEmail(String email) {
 		return userRepository.findByEmail(email);
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		return userRepository.findAll();
 	}
 
 }
