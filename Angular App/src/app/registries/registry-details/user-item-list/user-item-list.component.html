@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col-xs-10">
+    <table id="table"
+           data-toggle="table"
+           data-search="true"
+           data-filter-control="true"
+           data-show-export="true"
+           data-click-to-select="true"
+           data-toolbar="#toolbar"
+           data-pagination="true" data-side-pagination="client" data-page-size="5"
+           data-page-list="[5, 10, 25, 50, ALL]">
+      <thead>
+      <tr>
+        <th></th>
+        <th></th>
+        <th data-field="name" data-filter-control="input" data-sortable="true">Name</th>
+        <th data-field="brand" data-filter-control="select" data-sortable="true">Brand</th>
+        <th data-field="category" data-filter-control="select" data-sortable="true">Category</th>
+        <th data-field="agegroup" data-filter-control="select" data-sortable="true">Age Group</th>
+        <th data-field="price" data-filter-control="input" data-sortable="true">Price</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let item of itemList">
+        <td class="col-xs-1">
+          <input type="checkbox" style="padding: 0px"
+                 (change)="addToSelectedItemList($event.target.checked, item.itemId)"/>
+        </td>
+        <td class="col-md-2"><img class="img-responsive" src="{{item.imageUrl}}"></td>
+        <td class="col-md-2">{{item.name}}</td>
+        <td class="col-md-2">{{item.brand}}</td>
+        <td class="col-md-2">{{item.category}}</td>
+        <td class="col-md-1">{{item.agegroup}}</td>
+        <td class="col-md-1 col-xs-1" style="font-weight: bold;">{{item.price | currency}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  var $table = $('#table');
+  $table.bootstrapTable({});
+  $(function () {
+    $('#toolbar').find('select').change(function () {
+      $table.bootstrapTable({});
+    });
+  })
+
+  var trBoldBlue = $("table");
+
+  $(trBoldBlue).on("click", "tr", function () {
+    $(this).toggleClass("bold-blue");
+  });
+</script>

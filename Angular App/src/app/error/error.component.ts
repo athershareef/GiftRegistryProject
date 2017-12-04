@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {logger} from 'codelyzer/util/logger';
 
 @Component({
@@ -8,7 +8,8 @@ import {logger} from 'codelyzer/util/logger';
 })
 export class ErrorComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     logger.info('w');

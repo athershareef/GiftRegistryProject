@@ -22,7 +22,6 @@ export class UserEditComponent implements OnInit, OnDestroy {
     this.user = this.authService.user;
 
     this.userChangeSubs = this.authService.userChange.subscribe((user: User) => {
-      console.log('Edit change fired');
       if (user.username !== '') {
         this.user = user;
         this.loggedIn = true;

@@ -1,4 +1,4 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable, NgZone, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {User} from '../model/user';
 import {UserComService} from '../services/user-com.service';
@@ -9,8 +9,12 @@ import {AlertService} from '../services/alert.service';
 export class AuthService implements OnInit {
 
   userChange = new Subject<User>();
+
+  constructor(private router: Router, private userComService: UserComService, private alertService: AlertService,
+              private ngZone: NgZone) {
+  }
+
   private _user: User;
-  private _loggedIn = false;
 
   get user(): User {
     return this._user;
@@ -20,6 +24,8 @@ export class AuthService implements OnInit {
     this._user = value;
   }
 
+  private _loggedIn = false;
+
   get loggedIn(): boolean {
     return this._loggedIn;
   }
@@ -28,11 +34,7 @@ export class AuthService implements OnInit {
     this._loggedIn = value;
   }
 
-  constructor(private router: Router, private userComService: UserComService, private alertService: AlertService) {
-  }
-
   ngOnInit() {
-    console.log('in Auth On Init');
     if (this._loggedIn === false && localStorage.getItem('_loggedIn') === 'true') {
       this.userComService.getCurrentUser().subscribe((user: User) => {
           this._loggedIn = true;
@@ -52,7 +54,12 @@ export class AuthService implements OnInit {
         this._loggedIn = true;
         this._user = response as User;
         localStorage.setItem('_loggedIn', 'true');
-        this.router.navigate(['/home']);
+        if (user.email === 'admin@gmail.com') {
+          this.router.navigate(['/admin']);
+          this.alertService.success('Welcome Admin !');
+        } else {
+          this.router.navigate(['/home']);
+        }
         this.userChange.next(this._user);
       },
       error => {
@@ -96,7 +103,10 @@ export class AuthService implements OnInit {
         this._loggedIn = true;
         this._user = user;
         localStorage.setItem('_loggedIn', 'true');
-        this.router.navigate(['/home']);
+
+        // Fixing the Bug with routing - Ather
+
+        this.ngZone.run(() => this.router.navigateByUrl('/home'));
       },
       () => {
         this.alertService.error('User is not available, please Signup');
@@ -110,8 +120,8 @@ export class AuthService implements OnInit {
         this._user = user;
         this._loggedIn = true;
         localStorage.setItem('_loggedIn', 'true');
-        this.router.navigate(['/home']);
         this.userChange.next(user);
+        this.ngZone.run(() => this.router.navigateByUrl('/home'));
       },
       () => {
         this.router.navigate(['/login']);

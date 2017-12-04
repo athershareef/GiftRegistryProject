@@ -13,8 +13,8 @@ export class UserComService {
   }
 
 
-  getItems() {
-    return this.http.get(this.serverURL + 'item', {withCredentials: true});
+  getAllUsers() {
+    return this.http.get(this.userPathURL + 'users', {withCredentials: true});
   }
 
   forgotPassword(email: String) {
@@ -76,7 +76,5 @@ export class UserComService {
     return this.http.put(this.userPathURL + 'id/' + id, user, {withCredentials: true});
   }
 
-  createRegistry(ids: number[]) {
-    return this.http.post(this.serverURL + 'registry/create', ids, {withCredentials: true});
-  }
+
 }

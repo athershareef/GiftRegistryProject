@@ -16,17 +16,31 @@ import {HomeComponent} from './home/home.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthGuard} from './auth/auth.guard';
 import {UserEditComponent} from './auth/user-edit/user-edit.component';
-import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
-import { ErrorComponent } from './error/error.component';
+import {ForgotPasswordComponent} from './auth/forgot-password/forgot-password.component';
+import {ErrorComponent} from './error/error.component';
 import {RequestInterceptorService} from './services/request-interceptor.service';
-import { AlertComponent } from './alert/alert.component';
+import {AlertComponent} from './alert/alert.component';
 import {AlertService} from './services/alert.service';
-import { ItemsComponent } from './items/items.component';
-import { ItemEditComponent } from './items/item-edit/item-edit.component';
-import { ItemDetailsComponent } from './items/item-details/item-details.component';
-import { ItemListComponent } from './items/item-list/item-list.component';
-import { ItemComponent } from './items/item-list/item/item.component';
-import {ItemService} from "./items/item.service";
+import {RegistriesComponent} from './registries/registries.component';
+import {RegistryListComponent} from './registries/registry-list/registry-list.component';
+import {RegistryDetailsComponent} from './registries/registry-details/registry-details.component';
+import {RegistryComponent} from './registries/registry-list/registry/registry.component';
+import {RegistryItemListComponent} from './registries/registry-details/registry-item-list/registry-item-list.component';
+import {RegistryStartComponent} from './registries/registry-start/registry-start.component';
+import {RegistryItemComponent} from './registries/registry-details/registry-item-list/registry-item/registry-item.component';
+import {RegistryEditComponent} from './registries/registry-edit/registry-edit.component';
+import {RegistryService} from './registries/registry.service';
+import {RegistryComService} from './services/registry-com.service';
+import {AddRegistryItemComponent} from './registries/registry-details/add-registry-item/add-registry-item.component';
+import {UserItemListComponent} from './registries/registry-details/user-item-list/user-item-list.component';
+import {RegistryDetailsService} from './registries/registry-details/registry-details.service';
+import {ItemComService} from './services/item-com.service';
+import {DataTablesModule} from 'angular-datatables';
+import {AddNewItemComponent} from './admin/add-new-item/add-new-item.component';
+import {ItemListComponent} from './admin/item-list/item-list.component';
+import {AdminComponent} from './admin/admin.component';
+import {AdminGuard} from './admin/admin.guard';
+import { RegistryShareComponent } from './registries/registry-share/registry-share.component';
 
 @NgModule({
   declarations: [
@@ -42,24 +56,35 @@ import {ItemService} from "./items/item.service";
     ForgotPasswordComponent,
     ErrorComponent,
     AlertComponent,
-    ItemsComponent,
-    ItemEditComponent,
-    ItemDetailsComponent,
+    UserItemListComponent,
+    RegistryDetailsComponent,
+    RegistriesComponent,
+    RegistryListComponent,
+    RegistryComponent,
+    RegistryItemListComponent,
+    RegistryStartComponent,
+    RegistryItemComponent,
+    RegistryEditComponent,
+    AddRegistryItemComponent,
+    AddNewItemComponent,
     ItemListComponent,
-    ItemComponent,
+    AdminComponent,
+    RegistryShareComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DataTablesModule
   ],
-  providers: [UserComService, AuthService, AuthGuard,ItemService, AlertService, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: RequestInterceptorService,
-    multi: true,
-  }],
+  providers: [UserComService, AuthService, AdminGuard, AuthGuard, ItemComService, RegistryComService,
+    RegistryService, RegistryDetailsService, AlertService, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptorService,
+      multi: true,
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
