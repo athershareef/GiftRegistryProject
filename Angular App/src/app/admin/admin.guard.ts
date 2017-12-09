@@ -10,13 +10,14 @@ export class AdminGuard implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (localStorage.getItem('loggedIn') === 'true' && this.authService.loggedIn === true) {
-      if (this.authService.user.email === 'admin@gmail.com') {
-        return true;
-      }
-    }
-    // not Admin logged in so redirect to login page with the return url
-    this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
-    return false;
+    return true;
+    // if (localStorage.getItem('loggedIn') === 'true' && this.authService.loggedIn === true) {
+    //   if (this.authService.user.email === 'admin@gmail.com') {
+    //     return true;
+    //   }
+    // }
+    // // not Admin logged in so redirect to login page with the return url
+    // this.router.navigate(['/login'], {queryParams: {returnUrl: state.url}});
+    // return false;
   }
 }

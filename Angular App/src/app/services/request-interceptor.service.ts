@@ -11,7 +11,8 @@ export class RequestInterceptorService implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     request = request.clone({
       setHeaders: {
-        'Content-Encoding': 'gzip'
+        'Content-Encoding': 'gzip',
+        'Content-Type': 'application/json',
       }
     });
 

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Registry} from '../../model/registry';
 import {User} from '../../model/user';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 import {RegistryDetailsService} from '../registry-details/registry-details.service';
 import {RegistryService} from '../registry.service';
 

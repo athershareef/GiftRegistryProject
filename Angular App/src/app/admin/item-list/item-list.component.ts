@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {Item} from '../../model/item';
 import {ItemComService} from '../../services/item-com.service';
-import {AlertService} from "../../services/alert.service";
+import {AlertService} from '../../services/alert.service';
 
 
 @Component({

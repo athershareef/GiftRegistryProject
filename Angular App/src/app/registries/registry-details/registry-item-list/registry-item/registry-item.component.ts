@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Item} from '../../../../model/item';
-import {ActivatedRoute, Params} from "@angular/router";
-import {RegistryDetailsService} from "../../registry-details.service";
+import {ActivatedRoute, Params} from '@angular/router';
+import {RegistryDetailsService} from '../../registry-details.service';
 
 @Component({
   selector: 'app-registry-item',
@@ -26,12 +26,8 @@ export class RegistryItemComponent implements OnInit {
         }
       }
     );
-
   }
 
-  onSelect(item: Item) {
-
-  }
 
   removeOne(item: Item) {
     this.listOfItemsDeleted.push(item.itemId);

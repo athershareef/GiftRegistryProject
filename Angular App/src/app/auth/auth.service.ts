@@ -4,6 +4,7 @@ import {User} from '../model/user';
 import {UserComService} from '../services/user-com.service';
 import {Subject} from 'rxjs/Subject';
 import {AlertService} from '../services/alert.service';
+import {SharedRegistriesComponent} from '../shared-registries/shared-registries.component';
 
 @Injectable()
 export class AuthService implements OnInit {
@@ -53,12 +54,13 @@ export class AuthService implements OnInit {
       (response: User) => {
         this._loggedIn = true;
         this._user = response as User;
+        console.log(response);
         localStorage.setItem('_loggedIn', 'true');
         if (user.email === 'admin@gmail.com') {
           this.router.navigate(['/admin']);
           this.alertService.success('Welcome Admin !');
         } else {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/sharedRegistries']);
         }
         this.userChange.next(this._user);
       },
@@ -106,7 +108,7 @@ export class AuthService implements OnInit {
 
         // Fixing the Bug with routing - Ather
 
-        this.ngZone.run(() => this.router.navigateByUrl('/home'));
+        this.ngZone.run(() => this.router.navigateByUrl('/sharedRegistries'));
       },
       () => {
         this.alertService.error('User is not available, please Signup');
@@ -121,7 +123,7 @@ export class AuthService implements OnInit {
         this._loggedIn = true;
         localStorage.setItem('_loggedIn', 'true');
         this.userChange.next(user);
-        this.ngZone.run(() => this.router.navigateByUrl('/home'));
+        this.ngZone.run(() => this.router.navigateByUrl('/sharedRegistries'));
       },
       () => {
         this.router.navigate(['/login']);
@@ -135,7 +137,7 @@ export class AuthService implements OnInit {
         this._loggedIn = true;
         this._user = user;
         this.userChange.next(user);
-        this.router.navigate(['/home']);
+        // this.router.navigate(['/home']);
       },
       error => {
         console.log(error);

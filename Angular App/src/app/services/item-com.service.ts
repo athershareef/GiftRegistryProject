@@ -5,7 +5,7 @@ import {Item} from '../model/item';
 @Injectable()
 export class ItemComService {
 
-  private itemPathURL = 'http://localhost:8080/item/';
+  private itemPathURL = 'https://localhost:8443/item/';
 
   constructor(private http: HttpClient) {
   }

@@ -1,39 +1,34 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {RegistryDetailsService} from '../registry-details.service';
-import {RegistryService} from '../../registry.service';
 import {Registry} from '../../../model/registry';
+import {RegistryService} from '../../../registries/registry.service';
+import {RegistryDetailsService} from '../../../registries/registry-details/registry-details.service';
 import {Item} from '../../../model/item';
 import {RegistryItem} from '../../../model/registryitem';
+import {SharedRegistryDetailsService} from '../shared-registry-details.service';
+import {SharedRegistryService} from '../../shared-registry.service';
 
 @Component({
-  selector: 'app-registry-item-list',
-  templateUrl: './registry-item-list.component.html',
-  styleUrls: ['./registry-item-list.component.css']
+  selector: 'app-shared-registry-item-list',
+  templateUrl: './shared-registry-item-list.component.html',
+  styleUrls: ['./shared-registry-item-list.component.css']
 })
-export class RegistryItemListComponent implements OnInit {
-
+export class SharedRegistryItemListComponent implements OnInit {
   @Input() registryItemList: RegistryItem[];
 
   @Input() registryId;
 
   @Input() itemList: Item[];
 
-  constructor(private router: Router, private registryDetailService: RegistryDetailsService, private registryService: RegistryService) {
+  constructor(private router: Router, private registryDetailService: RegistryDetailsService,private sharedRegistryDetailsService:SharedRegistryDetailsService, private registryService: RegistryService, private sharedRegistryService:SharedRegistryService) {
   }
 
   ngOnInit() {
     // Big Change
-    this.registryDetailService.registryChangedSub.subscribe((registry: Registry) => {
+    this.sharedRegistryDetailsService.registryChangedSub.subscribe((registry: Registry) => {
       this.registryItemList = registry.registryItemList;
       this.setItemList();
     });
-  }
-
-  onAddItem() {
-    this.registryDetailService.registryIdChanged.next(this.registryId);
-    this.registryDetailService.registryChangedSub.next(this.registryService.getRegistryByID(this.registryId));
-    this.router.navigate(['/myRegistries/addItems/' + this.registryId]);
   }
 
   setItemList() {
@@ -46,13 +41,8 @@ export class RegistryItemListComponent implements OnInit {
       } else{
         registryItem.item.giftUser = "None"
       }
-
       this.itemList.push(registryItem.item);
     }
   }
 
-
-  shareRegistry() {
-    this.router.navigate(['/myRegistries/share/' + this.registryId]);
-  }
 }

@@ -14,6 +14,11 @@ export class UserItemListComponent implements OnInit {
   itemList: Item[];
   selectedItemList: number[] = [];
 
+  showFilter = false;
+
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+
   constructor(private itemComService: ItemComService, private router: Router, private registryDetailService: RegistryDetailsService) {
   }
 
@@ -28,9 +33,15 @@ export class UserItemListComponent implements OnInit {
   }
 
   getItemList() {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 3
+    };
     this.itemComService.getItemList().subscribe(
       res => {
+        console.log(res);
         this.itemList = res;
+        this.dtTrigger.next();
       },
       error => {
         console.log(error);
@@ -41,5 +52,6 @@ export class UserItemListComponent implements OnInit {
   ngOnInit() {
     this.getItemList();
   }
+
 
 }

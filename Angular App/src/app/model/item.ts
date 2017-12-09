@@ -13,6 +13,8 @@ export class Item {
 
   public agegroup: string;
 
+  public giftUser: string;
+
 
   // constructor(name: string, category: string, price: number, imageUrl: string, brand: string, agegroup: string, itemId?: number) {
   //   this.itemId = itemId;

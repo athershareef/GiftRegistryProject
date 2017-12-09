@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AlertService} from '../../../services/alert.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {RegistryDetailsService} from '../registry-details.service';
-import {Registry} from "../../../model/registry";
+import {Registry} from '../../../model/registry';
 
 @Component({
   selector: 'app-add-registry-item',

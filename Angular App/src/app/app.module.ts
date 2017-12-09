@@ -12,7 +12,6 @@ import {GoogleSigninComponent} from './auth/signin/google-signin/google-signin.c
 import {UserComService} from './services/user-com.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthService} from './auth/auth.service';
-import {HomeComponent} from './home/home.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthGuard} from './auth/auth.guard';
 import {UserEditComponent} from './auth/user-edit/user-edit.component';
@@ -27,7 +26,6 @@ import {RegistryDetailsComponent} from './registries/registry-details/registry-d
 import {RegistryComponent} from './registries/registry-list/registry/registry.component';
 import {RegistryItemListComponent} from './registries/registry-details/registry-item-list/registry-item-list.component';
 import {RegistryStartComponent} from './registries/registry-start/registry-start.component';
-import {RegistryItemComponent} from './registries/registry-details/registry-item-list/registry-item/registry-item.component';
 import {RegistryEditComponent} from './registries/registry-edit/registry-edit.component';
 import {RegistryService} from './registries/registry.service';
 import {RegistryComService} from './services/registry-com.service';
@@ -40,7 +38,18 @@ import {AddNewItemComponent} from './admin/add-new-item/add-new-item.component';
 import {ItemListComponent} from './admin/item-list/item-list.component';
 import {AdminComponent} from './admin/admin.component';
 import {AdminGuard} from './admin/admin.guard';
-import { RegistryShareComponent } from './registries/registry-share/registry-share.component';
+import {RegistryShareComponent} from './registries/registry-share/registry-share.component';
+import {SharedRegistriesComponent} from './shared-registries/shared-registries.component';
+import {SharedRegistryDetailsComponent} from './shared-registries/shared-registry-details/shared-registry-details.component';
+import {SharedRegistryItemListComponent} from './shared-registries/shared-registry-details/shared-registry-item-list/shared-registry-item-list.component';
+import {SharedRegistryItemComponent} from './shared-registries/shared-registry-details/shared-registry-item-list/shared-registry-item/shared-registry-item.component';
+import {SharedRegistryListComponent} from './shared-registries/shared-registry-list/shared-registry-list.component';
+import {SharedRegistryComponent} from './shared-registries/shared-registry-list/shared-registry/shared-registry.component';
+import {SharedRegistryStartComponent} from './shared-registries/shared-registry-start/shared-registry-start.component';
+import {SharedRegistryService} from './shared-registries/shared-registry.service';
+import {SharedRegistryDetailsService} from './shared-registries/shared-registry-details/shared-registry-details.service';
+import {SharedRegistryComService} from './services/shared-registry-com.service';
+import {RegistryItemComponent} from './registries/registry-details/registry-item-list/registry-item/registry-item.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +60,6 @@ import { RegistryShareComponent } from './registries/registry-share/registry-sha
     SigninComponent,
     SignupComponent,
     GoogleSigninComponent,
-    HomeComponent,
     UserEditComponent,
     ForgotPasswordComponent,
     ErrorComponent,
@@ -63,13 +71,20 @@ import { RegistryShareComponent } from './registries/registry-share/registry-sha
     RegistryComponent,
     RegistryItemListComponent,
     RegistryStartComponent,
-    RegistryItemComponent,
     RegistryEditComponent,
     AddRegistryItemComponent,
     AddNewItemComponent,
     ItemListComponent,
     AdminComponent,
     RegistryShareComponent,
+    SharedRegistriesComponent,
+    SharedRegistryDetailsComponent,
+    SharedRegistryItemListComponent,
+    SharedRegistryItemComponent,
+    SharedRegistryListComponent,
+    SharedRegistryComponent,
+    SharedRegistryStartComponent,
+    RegistryItemComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +95,7 @@ import { RegistryShareComponent } from './registries/registry-share/registry-sha
     DataTablesModule
   ],
   providers: [UserComService, AuthService, AdminGuard, AuthGuard, ItemComService, RegistryComService,
-    RegistryService, RegistryDetailsService, AlertService, {
+    RegistryService, RegistryDetailsService,SharedRegistryService,SharedRegistryDetailsService,SharedRegistryComService, AlertService, {
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptorService,
       multi: true,

@@ -6,8 +6,8 @@
   <td class="col-md-1 col-xs-1" style="font-weight: bold;">{{item.price | currency}}</td>
   <td class="col-md-2">{{item.giftUser}}</td>
   <td>
-    <button type="button" class="btn btn-link btn-xs" (click)="removeOne(item)" value="delete">
-      <span class="glyphicon glyphicon-trash"> </span>
+    <button type="button" class="btn btn-primary" (click)="selfAssign(item)" value="Assign to me">
+      <span>Assign To Me</span>
     </button>
   </td>
   <!--<span class="pull-right">-->

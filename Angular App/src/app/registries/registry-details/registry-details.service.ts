@@ -3,8 +3,8 @@ import {RegistryComService} from '../../services/registry-com.service';
 import {Registry} from '../../model/registry';
 import {Subject} from 'rxjs/Subject';
 import {RegistryService} from '../registry.service';
-import {AlertService} from "../../services/alert.service";
-import {Router} from "@angular/router";
+import {AlertService} from '../../services/alert.service';
+import {Router} from '@angular/router';
 
 
 @Injectable()

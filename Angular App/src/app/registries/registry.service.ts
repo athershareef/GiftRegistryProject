@@ -5,8 +5,8 @@ import {AuthService} from '../auth/auth.service';
 import {RegistryComService} from '../services/registry-com.service';
 import {AlertService} from '../services/alert.service';
 import {Router} from '@angular/router';
-import {User} from "../model/user";
-import {UserComService} from "../services/user-com.service";
+import {User} from '../model/user';
+import {UserComService} from '../services/user-com.service';
 
 @Injectable()
 export class RegistryService {
@@ -97,6 +97,5 @@ export class RegistryService {
         console.log(error);
         this.alertService.error('Unable to share registry, please try again!');
       });
-    ;
   }
 }

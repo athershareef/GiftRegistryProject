@@ -5,9 +5,9 @@ import {User} from '../model/user';
 @Injectable()
 export class UserComService {
 
-  private userPathURL = 'http://localhost:8080/user/';
+  private userPathURL = 'https://localhost:8443/user/';
 
-  private serverURL = 'http://localhost:8080/';
+  private serverURL = 'https://localhost:8443/';
 
   constructor(private http: HttpClient) {
   }

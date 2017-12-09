@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from "@angular/router";
-import {User} from "../../model/user";
-import {RegistryService} from "../registry.service";
+import {ActivatedRoute, Params} from '@angular/router';
+import {User} from '../../model/user';
+import {RegistryService} from '../registry.service';
 
 @Component({
   selector: 'app-registry-share',

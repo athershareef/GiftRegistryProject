@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Registry} from '../../model/registry';
 import {Subscription} from 'rxjs/Subscription';
 import {RegistryService} from '../registry.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-registry-list',

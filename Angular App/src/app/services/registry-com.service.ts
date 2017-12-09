@@ -4,9 +4,9 @@ import {HttpClient} from '@angular/common/http';
 @Injectable()
 export class RegistryComService {
 
-  private registryPathURL = 'http://localhost:8080/registry/';
+  private registryPathURL = 'https://localhost:8443/registry/';
 
-  private serverURL = 'http://localhost:8080/';
+  private serverURL = 'https://localhost:8443/';
 
   constructor(private http: HttpClient) {
   }
