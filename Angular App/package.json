@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --ssl true --ssl-key certs/server.key --ssl-cert certs/server.crt",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -29,6 +30,7 @@
     "bootstrap": "^3.3.7",
     "bootstrap-social": "^5.1.1",
     "bootstrap-table": "^1.11.2",
+    "browser-sync": "^2.18.13",
     "codelyzer": "^4.0.1",
     "core-js": "^2.4.1",
     "datatables.net": "^1.10.16",
