@@ -99,19 +99,26 @@ public class Registry implements Serializable {
 		registryItem.setItem(item);
 		registryItem.setRegistry(this);
 		this.getRegistryItemList().add(registryItem);
+	}
+	
+	@Transactional
+	public void addItemAndGiftUser(Item item, User user) {
+		RegistryItem registryItem = new RegistryItem();
+		registryItem.setItem(item);
+		registryItem.setRegistry(this);
+		registryItem.setGiftUser(user);
+		this.getRegistryItemList().add(registryItem);
+	}
 
-		// RegistryItem association = new RegistryItem();
-		// association.setRegistry(this);
-		// association.setItem(item);
-		// association.setRegistryId(this.getRegistryId());
-		// association.setItemId(item.getItemId());
-		// association.setGiftUser(new User());
-		// if (this.registryItemList == null)
-		// this.registryItemList = new ArrayList<>();
-		//
-		// this.registryItemList.add(association);
-		// // Also add the association object to the item.
-		// item.getRegistryItemList().add(association);
+	@Transactional
+	public void deleteItem(Item item, User user) {
+		RegistryItem registryItem = new RegistryItem();
+		registryItem.setItem(item);
+		registryItem.setRegistry(this);
+		if (user != null) {
+			registryItem.setGiftUser(user);
+		}
+		this.getRegistryItemList().remove(registryItem);
 	}
 
 	public void removeItem(Item item) {

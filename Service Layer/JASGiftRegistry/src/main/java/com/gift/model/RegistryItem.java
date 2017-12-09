@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class RegistryItem implements Serializable {
 
@@ -17,7 +19,8 @@ public class RegistryItem implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	@JsonIgnore
+	private long id;
 
 	@ManyToOne
 	@JoinColumn(name = "registry_id")
@@ -34,6 +37,14 @@ public class RegistryItem implements Serializable {
 
 	public RegistryItem() {
 		super();
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public User getGiftUser() {

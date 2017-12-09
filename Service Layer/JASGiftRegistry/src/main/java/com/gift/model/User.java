@@ -5,21 +5,16 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User implements UserDetails, Serializable {
@@ -40,10 +35,6 @@ public class User implements UserDetails, Serializable {
 	@Column(unique = true)
 	@NotNull(message = "Email cannot be empty")
 	private String email;
-
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JsonIgnore
-	private Set<UserRole> userRoles = new HashSet<>();
 
 	public User() {
 		super();
@@ -90,14 +81,6 @@ public class User implements UserDetails, Serializable {
 		this.email = email;
 	}
 
-	public Set<UserRole> getUserRoles() {
-		return userRoles;
-	}
-
-	public void setUserRoles(Set<UserRole> userRoles) {
-		this.userRoles = userRoles;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -107,7 +90,7 @@ public class User implements UserDetails, Serializable {
 
 		Set<GrantedAuthority> authorities = new HashSet<>();
 
-		userRoles.forEach(userRole -> authorities.add(new SimpleGrantedAuthority(userRole.getUser().getUsername())));
+		authorities.add(new SimpleGrantedAuthority(this.username));
 
 		return authorities;
 	}
