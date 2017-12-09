@@ -3,7 +3,6 @@ package com.gift.service;
 import static com.gift.util.Messages.USER_EXISTS;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -13,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gift.exception.UserRegistrationException;
-import com.gift.model.Role;
 import com.gift.model.User;
-import com.gift.model.UserRole;
-import com.gift.repository.RoleRepository;
 import com.gift.repository.UserRepository;
 
 @Service
@@ -27,29 +23,28 @@ public class UserServiceImpl implements IUserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
-	private RoleRepository roleRepository;
-
 	@Override
 	@Transactional
-	public User createUser(User user, Set<UserRole> userRoles) {
+	public User createUser(User user) {
 		User userPresent = userRepository.findByEmail(user.getEmail());
 
 		if (userPresent != null) {
 			logger.info(USER_EXISTS);
 			throw new UserRegistrationException(USER_EXISTS);
 		} else {
-			System.out.println("myroe" + userRoles);
-			if (userRoles.size() != 0) {
-				for (UserRole userRole : userRoles) {
-					roleRepository.save(userRole.getRole());
-				}
-			} else {
-				roleRepository.save(new Role());
-			}
-
-			// Combine role and user
-			user.getUserRoles().addAll(userRoles);
+			// System.out.println("myroe" + userRoles);
+			// if (userRoles.size() != 0) {
+			// for (UserRole userRole : userRoles) {
+			// roleRepository.save(userRole.getRole());
+			// }
+			// } else {
+			// roleRepository.save(new Role());
+			// }
+			//
+			// // Combine role and user
+			//
+			// // uncomment this
+			// // user.getUserRoles().addAll(userRoles);
 
 			userPresent = userRepository.save(user);
 		}

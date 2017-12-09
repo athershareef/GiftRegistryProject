@@ -1,14 +1,11 @@
 package com.gift.service;
 
 import java.util.List;
-import java.util.Set;
 
 import com.gift.model.User;
-import com.gift.model.UserRole;
 
 public interface IUserService {
 
-	User createUser(User user, Set<UserRole> userRoles);
 
 	User getUserById(long id);
 
@@ -17,5 +14,7 @@ public interface IUserService {
 	User updateUser(User user);
 	
 	List<User> getAllUsers();
+
+	User createUser(User user);
 
 }

@@ -23,13 +23,14 @@ spring:
     tomcat:
       test-while-idle: 'true'
       validationQuery: SELECT 1
-    url: jdbc:mysql://localhost:3306/giftregistry?useSSL=true
+    url: jdbc:mysql://localhost:3306/gift?useSSL=true
     username: root
   jpa:
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
+        enable_lazy_load_no_trans: true
         dialect: org.hibernate.dialect.MySQL5Dialect
     show-sql: 'true'
 logging:

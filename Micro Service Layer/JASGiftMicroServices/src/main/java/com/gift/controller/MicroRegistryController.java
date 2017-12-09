@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gift.exception.ItemNotFoundException;
 import com.gift.exception.RegistryNotFoundException;
 import com.gift.model.Item;
 import com.gift.model.Registry;
@@ -27,6 +28,7 @@ import com.gift.repository.RegistryItemRepository;
 import com.gift.repository.RegistryRepository;
 import com.gift.service.ItemServiceImpl;
 import com.gift.service.UserServiceImpl;
+import com.gift.util.Response;
 
 @RestController
 @CrossOrigin
@@ -207,6 +209,30 @@ public class MicroRegistryController {
 		}
 		registries.addAll(publicRegistries);
 		return registries;
+	}
+
+	@PostMapping("/{registryId}/{itemId}/{userId}")
+	public Response selfAssignItemToUser(@PathVariable long registryId, @PathVariable long itemId,
+			@PathVariable long userId, HttpServletResponse response) {
+		logger.info("Assigning the Registry Item to the specific user " + userId);
+
+		User user = userService.getUserById(userId);
+		List<RegistryItem> list = registryItemRepository.getAllByItemItemIdAndRegistryRegistryId(itemId, registryId);
+
+		if (list.size() == 0) {
+			throw new ItemNotFoundException("No matching registries found");
+		}
+
+		// matching an item id and registry id,, there can only be one registry
+		// Item if present
+		RegistryItem registryItem = list.get(0);
+
+		System.out.println(user);
+
+		registryItemRepository.setGiftUser(registryItem.getId(), user);
+
+		return new Response("Self Assigned registry " + registryId + " to, " + userId);
+
 	}
 
 }

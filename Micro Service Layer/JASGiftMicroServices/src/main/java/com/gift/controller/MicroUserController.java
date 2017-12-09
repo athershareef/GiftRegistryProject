@@ -1,9 +1,7 @@
 package com.gift.controller;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -21,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gift.exception.ItemNotFoundException;
-import com.gift.model.Role;
 import com.gift.model.User;
-import com.gift.model.UserRole;
 import com.gift.service.UserServiceImpl;
 import com.gift.util.Response;
 
@@ -62,11 +58,11 @@ public class MicroUserController {
 		logger.info("Creating the User");
 		logger.debug("Creating the User: " + user);
 
-		Set<UserRole> userRoles = new HashSet<>();
-		Role userRole = new Role();
-		userRole.setName("ROLE_USER");
-		userRoles.add(new UserRole(user, userRole));
-		User createdUser = userService.createUser(user, userRoles);
+		// Set<UserRole> userRoles = new HashSet<>();
+		// Role userRole = new Role();
+		// userRole.setName("ROLE_USER");
+		// userRoles.add(new UserRole(user, userRole));
+		User createdUser = userService.createUser(user);
 		response.setStatus(201);
 		return createdUser;
 	}

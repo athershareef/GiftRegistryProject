@@ -100,6 +100,15 @@ public class Registry implements Serializable {
 		registryItem.setRegistry(this);
 		this.getRegistryItemList().add(registryItem);
 	}
+	
+	@Transactional
+	public void addItemAndGiftUser(Item item, User user) {
+		RegistryItem registryItem = new RegistryItem();
+		registryItem.setItem(item);
+		registryItem.setRegistry(this);
+		registryItem.setGiftUser(user);
+		this.getRegistryItemList().add(registryItem);
+	}
 
 	@Transactional
 	public void deleteItem(Item item, User user) {
